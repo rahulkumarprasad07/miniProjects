@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Expense Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="test.css">
+</head>
+<body>
+    <div id="main">
+        <!-- left side......... -->
+        <div id="sidebar">
+           <h2>Expense<br>Tracker</h2>
+           <hr>
+           <h3>OVER VIEW</h3>
+           <P><i class="fa-solid fa-circle-user"></i> My Account</P>
+            <p><i class="fa-solid fa-credit-card"></i> Transaction</p>
+            <hr>
+        <h3>MANAGEMENT</h3>
+        <p><i class="fa-solid fa-hand-holding-dollar"></i> Investment</p>
+        <p><i class="fa-solid fa-chart-simple"></i> Analytics</p>
+        <p><i class="fa-solid fa-magnifying-glass-dollar"></i> Budgeting</p>
+        <hr>
+        <h3>SETTINGS</h3>
+        <P><i class="fa-solid fa-gear"></i> Settings</P>
+        </div>
+
+
+        <!-- right side............. -->
+         <div id="rightPart">
+             <nav id="rightMenu">
+            <div class="leftGroup">
+                  <i class="fa-solid fa-bars"></i>
+           
+            </div>
+             <div id="slogan"><p id="para1"><i class="fa-solid fa-arrow-trend-up"></i> My Expense Tracker</p>
+            <p id="para2">"Track Your Monthly Spending"</p>
+            </div>
+          
+            <div class="rightGroup">
+                 <input   id="search"      type="text" placeholder=" your expenses........">
+            <img src="profile.jpg" alt="profile">
+            </div>
+           
+            
+
+          </nav>
+
+
+             <section id="Hero">
+            <div class="leftHero">
+             <h3>Track Smart,</h3>
+             <h3 class="color">Spend Wisely.</h3>
+             <p>Here's your summary for june 2026</p>
+
+         </div>
+         <div class="rightHero">
+            <img src="heroImage.png" alt="" class="heroImage">
+         </div>
+         </section>
+         <section class="middlePart">
+            <div class="box1">
+                <img src="spent.jpg" alt="image">
+                <h3>Total Spent</h3>
+                <h2><i class="fa-solid fa-indian-rupee-sign"></i>11,810</h2>
+                <p><i class="fa-solid fa-arrow-up"></i>12% from May</p>
+            </div>
+            <div class="box2">
+                <img src="shopping.jpg" alt="">
+                <h3>Highest Category</h3>
+                <h2><i class="fa-solid fa-indian-rupee-sign"></i>3,120</h2>
+            </div>
+                  <div class="box4">
+                <img src="food.jpg" alt="">
+                <h3>Food</h3>
+                <h2><i class="fa-solid fa-indian-rupee-sign"></i>5,700</h2>
+            </div>
+            <div class="box3">
+                <img src="month.jpg" alt="">
+            <h3>Current Month</h3>
+           
+            <h3>july 2026</h3>
+            <p>12 days left</p>
+            </div>
+      
+
+            
+         </section>
+
+
+
+
+
+
+
+
+         <section id="expenses">
+            <div class="leftExpense">
+                  <div class="titles">
+                <h3>Expense Categories</h3>
+                <h3>View Details<i class="fa-solid fa-arrow-right-long"></i></h3>
+            </div>
+            <div class="category">
+                <div class="food">
+                    <img src="food.jpg" alt="">
+                    <div class="progressBar">
+                        <div class="progressFood"></div>
+                    </div>
+                    <h3><i class="fa-solid fa-indian-rupee-sign"></i> 5,700</h3>
+                    <h3>73%</h3>
+
+                </div>
+                 <!-- 2nd caategory......... -->
+                    <div class="transport">
+                    <img src="transport2.jpg" alt="">
+                    <div class="progressBar">
+                        <div class="progressTransport"></div>
+                    </div>
+                    <h3><i class="fa-solid fa-indian-rupee-sign"></i> 1,980</h3>
+                    <h3>23%</h3>
+
+                </div>
+                <!-- 3rd category........... -->
+                   <div class="shopping">
+                    <img src="shoping2.jpg" alt="">
+                    <div class="progressBar">
+                        <div class="progressShopping"></div>
+                    </div>
+                    <h3><i class="fa-solid fa-indian-rupee-sign"></i> 3,120</h3>
+                    <h3>54%</h3>
+
+                </div>
+                <!-- 4th category........ -->
+                   <div class="entertainment">
+                    <img src="entertainment.jpg" alt="">
+                    <div class="progressBar">
+                        <div class="progressEntertainment"></div>
+                    </div>
+                    <h3><i class="fa-solid fa-indian-rupee-sign"></i> 1,010</h3>
+                    <h3>13%</h3>
+
+                </div>
+            </div>
+            </div>
+           
+            <div class="graph">
+                <h2>Spending Overview</h2>
+                <div class="dual">
+                     <div class="pieChart">
+                    <div class="outerCircle">
+                        <div class="innerCircle">
+                            <h3><i class="fa-solid fa-indian-rupee-sign"></i>11,810</h3>
+                            <p>Total</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="rightText">
+                    <p><i class="fa-solid fa-circle"></i>Food</p>
+                    <p><i class="fa-solid fa-circle"></i>Transport</p>
+                    <p><i class="fa-solid fa-circle"></i>Shopping</p>
+                    <p><i class="fa-solid fa-circle"></i>Entertainment</p>
+                </div>
+                <div class="monthPicker">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <select  id="month">
+                        <option >January</option>
+                        <option >Febuary</option>
+                        <option >March</option>
+                        <option >April</option>
+                        <option selected>May</option>
+                        <option >June</option>
+                        <option >July</option>
+                        <option >Agust</option>
+                        <option >September</option>
+                        <option >October</option>
+                        <option >November</option>
+                        <option >December</option>
+                    </select>
+                </div>
+                </div>
+               
+                
+            </div>
+            
+
+         </section>
+
+
+
+
+         <div class="mainFooter">
+             <section class="footer">
+            <div class="headings">
+                    <h2>Recent Transactions</h2>
+                    <p>See All<i class="fa-solid fa-chevron-right"></i></p>
+            </div>
+            <div class="container">
+                
+                  <div class="transaction netflix">
+                      <div class="left-part 1"> <img src="netflix.jpg" alt="image">
+                          <div class=" text 1">
+                             <p>Netflix Subscription</p>
+                              <p>June 10,2026<i class="fa-solid fa-circle"></i>Entertainment</p>
+                          </div>
+                       </div>
+                   
+                            <div class="amount text1Left">
+                               <h3>-<i class="fa-solid fa-indian-rupee-sign"></i>199</h3>
+                             </div>
+                    
+                  </div>
+
+
+                  <!-- 2nd container................ -->
+                <div class="transaction uber">
+                    <div class="left-part 2">
+                                  <img src="uber.jpg" alt="image">
+                          <div class="text 2">
+                                  <p>Uber Ride</p>
+                                   <p>June 9,2026<i class="fa-solid fa-circle"></i>Transport</p>
+                         </div>
+                    </div>
+                    
+                    <div class="amount text2Left">
+                        <h3>-<i class="fa-solid fa-indian-rupee-sign"></i>340</h3>
+                    </div>
+                    
+             </div>
+
+
+                  <!-- 3rd container.............. -->
+                       <div class="transaction Tomato">
+                        <div class="left-part 3">
+                             <img src="yt.jpg" alt="image">
+                    <div class="text 3">
+                        <p>Tomato</p>
+                    <p>June 9,2026<i class="fa-solid fa-circle"></i>Food</p>
+                    </div>
+                        </div>
+                   
+                    <div class="amount text3Left">
+                        <h3>-<i class="fa-solid fa-indian-rupee-sign"></i>560</h3>
+                    </div>
+                    
+                  </div>
+
+
+            </div>
+
+        
+           
+
+         </section>
+             <div class="ai">
+                <h3>Ask AI<i class="fa-solid fa-wand-magic-sparkles"></i></h3>
+                  <div class="outerBox">
+                    <h4>What do you want to see?</h4>
+                    <div class="searchBox">
+                        <p>Describe what you want and AI will generate images for you.</p>
+                    </div>
+                    <button class="search">search</button>
+                  </div>
+               
+            </div>
+
+         </div>
+         <section class="endPart">
+            <div class="end">
+                <p>This Expense Tracker is Created by <strong>Rahul Kumar Prasad</strong> to make monthly spending easier to understand and Manage</p>
+                <h2>Track smarter today,build a better tomorrow.</h2>
+            </div>
+         </section>
+
+
+         </div>
+        
+      
+    </div>
+    
+</body>
+</html>
