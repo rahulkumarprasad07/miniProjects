@@ -11,6 +11,7 @@ body {
     background: #0d1117;
     height: 100vh;
     width: 100vw;
+    color: #F5F5F5;
 }
 
 nav {
@@ -194,6 +195,162 @@ nav {
     transform: scale(.98);
 }
 
+/* sidebar.................. */
+
+.sideBar{
+    background: #111111;
+     border-right: 1px solid #2a2a2a;
+    position: fixed;
+    top:0;
+    left: -300px;
+    height: 100vh;
+    width: 300px;
+    padding: 20px;
+    transition: all 1s ease-in 0ms;
+    overflow-y: auto;
+    z-index: 1000;
+
+
+}
+.logo{
+    margin: 20px 0px;
+}
+.logo h2 span:first-child{
+    color: rgb(236, 175, 61);
+}
+.sideBar h2{
+    text-align: center;
+}
+.profile{
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile img{
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+.pfpText{
+    cursor: pointer;
+  transition: all 0.3s ease-in;
+}
+.pfpText:hover{
+    text-decoration: underline;
+}
+.profile img:hover{
+  
+    transform: scale(1.08);
+}
+.navigation{
+    margin: 20px 0px;
+
+}
+.navigation ul{
+       list-style: none;
+       margin: 10px 0;
+  
+     
+}
+.navigation a{
+    display: block;
+    text-decoration: none;
+        color: #F5F5F5; 
+    font-size: 18px;
+  line-height: 30px;
+    transition: all 0.3s ease;
+    border-radius: 10px;
+    padding: 8px 12px;
+}
+.navigation a:hover{
+    background: #1F2937;
+    color: #3B82F6;
+    transform: translateX(6px);
+}
+.navigation a i{
+    margin-right: 5px;
+}
+.navigation a:hover i{
+    color: #3B82F6;
+}
+.parentPreferences{
+     margin: 20px 0;
+}
+.preferences{
+     margin: 10px 0;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+   
+    align-items: start;
+}
+.preferences button{
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.preferences button:hover{
+    background: #3B82F6;
+    color: white;
+}
+
+.preferences a{
+    text-decoration: none;
+    color: #F5F5F5 ;
+    transition: all 0.3s ease;
+}
+.preferences a:hover{
+    color: #3B82F6;
+}
+.lastSection{
+    margin: 20px 0;
+    font-size: 18px;
+   
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.lastSection a{
+    color: #F5F5F5;
+}
+
+  .premiumBox{
+    height:30px;
+    width: 150px;
+    background: #2563EB;
+     border-radius: 12px;
+     border: 1px solid #F5F5F5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+     transition: all 0.3s ease;
+    cursor: pointer; 
+  }
+  .premiumBox:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(37,99,235,.35);
+}
+
+.premSide a{
+    font-size: 20px;
+    text-decoration: none;
+   
+}
+.premSide a i{
+     color: #FFD700;
+     margin-right: 3px;
+}
+.lastSection a,
+.lastSection h4{
+    transition: all 0.3s ease;
+}
+.lastSection a:hover,
+.lastSection h4:hover{
+    color: #FFD700;
+}
+
 
 
 
@@ -271,6 +428,39 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+/* sidebar............ */
+.sideBar{
+    width: 200px;
+}
+.sideBar h2{
+    font-size: 24px;
+}
+.profile img{
+    height: 60px;
+    width: 60px;
+}
+.navigation a{
+    font-size: 14px;
+    line-height: 18px;
+    
+    
+}
+.preferences{
+    font-size: 14px;
+    margin: 7px 0;
+}
+.lastSection{
+    font-size: 14px;
+    margin: 7px 0;
+}
+.premiumBox{
+    height: 25px;
+    width: 120px;
+    
+}
+.premiumBox a{
+    font-size: 18px;
 }
 
 }
@@ -362,4 +552,90 @@ nav {
     .icon.i3 {
         display: none;
     }
+
+    /* sidebar.......... */
+    
+       .sideBar{
+    width: 80vw;
+    padding: 15px;
 }
+
+.logo{
+    margin: 15px 0;
+}
+
+.logo h2{
+    font-size: 22px;
+}
+
+.profile{
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.profile img{
+    width: 50px;
+    height: 50px;
+}
+
+.profile h3{
+    font-size: 16px;
+}
+
+.profile p{
+    font-size: 13px;
+}
+
+.navigation{
+    margin: 15px 0;
+}
+
+.navigation h2,
+.parentPreferences h2{
+    font-size: 18px;
+}
+
+.navigation a{
+    font-size: 14px;
+    padding: 8px 0;
+}
+
+.navigation a i{
+    margin-right: 8px;
+}
+
+.preferences{
+    margin: 8px 0;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.preferences button{
+    width: 100%;
+    padding: 8px;
+    font-size: 13px;
+}
+
+.preferences a{
+    font-size: 14px;
+}
+
+.premiumBox{
+    width: 100%;
+    height: 35px;
+}
+
+.premSide a{
+    font-size: 15px;
+}
+
+.lastSection{
+    margin: 15px 0;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.lastSection h4{
+    font-size: 14px;
+}
+    }
