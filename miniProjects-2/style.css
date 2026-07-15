@@ -212,6 +212,9 @@ nav {
 
 
 }
+.sideBar.sidebarActive{
+    left: 0;
+}
 .logo{
     margin: 20px 0px;
 }
