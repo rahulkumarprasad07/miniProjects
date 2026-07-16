@@ -100,3 +100,7 @@ navigator.geolocation.getCurrentPosition((position)=>{
       
    
 });
+const toggle=document.querySelector('.toggle');
+toggle.addEventListener('click',()=>{
+document.body.classList.toggle("light-theme")
+})
