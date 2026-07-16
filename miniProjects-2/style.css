@@ -89,6 +89,9 @@ nav {
     transition: all 0.3s;
     border: 1px solid #333;
 }
+.icon.i3 span{
+    font-size: 18px;
+}
 
 .icon.i3:hover {
     border-color: #3B82F6;
@@ -386,6 +389,12 @@ nav {
         height: 40px;
 
     }
+    .icon.i3 span{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    font-size: 12px;
+}
 
     .icon.i3 i {
         font-size: 15px;
@@ -519,7 +528,12 @@ nav {
         font-size: 16px;
     }
 
-
+    .icon.i3 span{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+    font-size: 10px;
+         }
 
 
     .icon.i4 {

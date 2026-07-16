@@ -1,5 +1,6 @@
 const hamBurger = document.querySelector('.icon.i1');
 const sideBar = document.querySelector('.sideBar');
+
 // maine dono ko js mai target kia
  hamBurger.addEventListener("click",()=>{
   console.log('clicked');
@@ -26,19 +27,76 @@ const sideBar = document.querySelector('.sideBar');
 
 
 // navbar.............
-const locationInput=document.getElementById('locationSearch')
-locationInput.addEventListener('keydown',(event)=>{
+const searchCity=document.getElementById('searchCity');
+
+searchCity.addEventListener('keydown',(event)=>{
    console.log(event.key);
    if(event.key==="Enter"){
-      console.log(locationInput.value)
-      const city=locationInput.value;
+      console.log(searchCity.value)
+      const city=searchCity.value;
       async function fetchLocation(city){
-         const response=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=418c162c9bae3aa711f28518e1117cc4`)
+         try{
+         const response=await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=`)
           console.log(response);
           const data=await response.json();
           console.log(data);
+         if(!response.ok){
+            console.log(response.status)
+         }}
+          catch(error){
+            console.log(error)
+          }
       };
+      
       fetchLocation(city);
      
    }
 })
+ const currentLocation=document.getElementById('currentLocation')
+// currentLocation ka variable banya
+const sideCurrentLocation=document.getElementById('sideCurrentLocation')
+// sideCurrentLocation KA VARIAVLE BNAYA
+navigator.geolocation.getCurrentPosition((position)=>{
+   //navigator browser ka object usme bhut saari data store hai unhi mai se ek hai geolocation jisme location hota hai fir geoloacation ke ander more
+   // precisely hot HAI getCurrentPosition jo browswe se user ki location mangta hai fir browser user se permission mangta hai and then if yes then browswe ek fn 
+   // chalata hai position jisse hm user ki location print kra sktse hai
+   console.log(position);
+   // POSITON KI VALUE PRINT KI
+   console.log("location mil gyi")
+   const latitude=position.coords.latitude
+   // jo positin fn se latitude ki value mili uses store kia
+   const longitude=position.coords.longitude
+      // jo positin fn se longitude ki value mili uses store kia
+   console.log(longitude,latitude)
+   // console mai latitude and longitude ki value print ki
+   async function Location(latitude,longitude) {
+      //locatin name ka async fn banaua and useme latitide and longitude ki value pass ki
+      try{
+         //try event chalaya agr try nhi chla toh catach error chlega
+      const response=await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=`)
+      // response mai fetch ka promise store kia precisily await lagane se json form data mila usse response mai save kia
+      console.log(response);
+      // response ko console mai print kia
+      if(!response.ok){
+         console.log(response.status)
+      }
+      // ye wla error catch chlaya hai jo api ke error ko catch krega bhr try wala error js error catch krga like net error
+      // and ya ha maine data.ok nhi use kia coz data object mai and usme ye event nhi hai but reponse json mai jai usme ok feat hai
+      const data=await response.json();
+      console.log(data);
+      // ab data object mai hai toh mai usme se name extract krunga then html mai bhej dunga
+         currentLocation.innerText=data.name;
+         sideCurrentLocation.innerText=data.name;
+      //    dono id mai same data input de dia coz responsive mai mobile mai alg jgh use kia h
+      }
+      catch(error){
+         console.log(error)
+         //js mai hone wli error catch krta hu isse
+ 
+      }};
+      Location(latitude,longitude);
+      //functin call kia hai yaha
+    
+      
+   
+});
