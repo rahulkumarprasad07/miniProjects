@@ -100,7 +100,17 @@ navigator.geolocation.getCurrentPosition((position)=>{
       
    
 });
+const theme=document.querySelector(".theme")
 const toggle=document.querySelector('.toggle');
-toggle.addEventListener('click',()=>{
-document.body.classList.toggle("light-theme")
-})
+
+function switchTheme(){
+   document.body.classList.toggle("light-theme")
+   if(document.body.classList.contains("light-theme")){
+      theme.classList.add("themeActive")
+   }else{
+      theme.classList.remove("themeActive")
+   }
+
+}
+theme.addEventListener('click',switchTheme);
+toggle.addEventListener('click',switchTheme);

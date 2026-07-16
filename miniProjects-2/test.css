@@ -19,6 +19,7 @@
     --search-bg: #514e4e;
     --white: #FFFFFF;
     --gold: #FFD700;
+    --black:#000000;
 }
 
 body {
@@ -39,8 +40,9 @@ body.light-theme{
     --dark-border: #E5E7EB;
     --light-border: #CBD5E1;
     --search-bg: #F1F5F9;
-    --white: #FFFFFF;
+    --white: #ffffff;
     --gold: #FFD700;
+    --black:#000000;
 }
 
 nav {
@@ -325,11 +327,27 @@ nav {
     align-items: start;
 }
 
-.preferences button{
+.units{
+    background:var(--white) ;
+    margin: 8px 0;
+    height: 30px;
+    width: 60px;
     transition: all 0.3s ease;
     cursor: pointer;
 }
-
+.theme{
+    background:var(--white) ;
+    color: var(--black,black);
+    margin: 8px 0;
+    height: 30px;
+    width: 60px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.themeActive{
+     background:var(--black) ;
+   color:var(--white)
+}
 .preferences button:hover{
     background: var(--primary-color);
     color: var(--white);
