@@ -20,6 +20,8 @@
     --white: #FFFFFF;
     --gold: #FFD700;
     --black:#000000;
+    --grey:#8f8686;
+    --skyBlue:#8eceee;
 }
 
 body {
@@ -43,6 +45,8 @@ body.light-theme{
     --white: #ffffff;
     --gold: #FFD700;
     --black:#000000;
+     --skyBlue:#8eceee;
+        --grey:#8f8686;
 }
 
 nav {
@@ -412,6 +416,96 @@ nav {
 .lastSection h4:hover{
     color: var(--gold);
 }
+.midleftPart{
+    width: 68%;
+    font-size: 30px;
+    
+    color:var(--white);
+}
+.subNav{
+    display: flex;
+    justify-content: space-between;
+    
+    padding: 10px 15px;
+    margin: 1%;
+}
+.list ul{
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    
+}
+.days{
+    color: var(--grey);
+    text-decoration: none;
+}
+.active{
+    color: var(--white);
+}
+.btnLower{
+    width: 200px;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+   font-size: 25px;
+   padding: 8px;
+    background: var(--grey);
+    border-radius: 12px;
+}
+.btnUpper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3;
+    width: 100px;
+    height: 100%;
+    border-radius: 12px;
+    background:var(--skyBlue);
+}
+.btnActive{
+   transform: translateX(100px);
+}
+.tab{
+    position: relative;
+    z-index: 5;
+   font-size: 19px;
+   background-color: transparent;
+   border: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* tablet........... */
 @media (min-width:481px)and (max-width:768px) {
     nav {
