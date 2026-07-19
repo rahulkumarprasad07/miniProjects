@@ -36,7 +36,7 @@ searchCity.addEventListener('keydown', (event) => {
       const city = searchCity.value;
       async function fetchLocation(city) {
          try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=`)
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7b8caf3b8600898ce30dc1cca7abae07`)
             console.log(response);
             const data = await response.json();
             console.log(data);
@@ -98,6 +98,8 @@ navigator.geolocation.getCurrentPosition((position) => {
    };
    Location(latitude, longitude);
    //functin call kia hai yaha
+   rainGraph(latitude,longitude);
+   forcastIcon(latitude,longitude);
 
 
 
@@ -167,6 +169,8 @@ if(index===0){
 
 
 //graph.......//
+const bars=document.querySelectorAll('.actualBars')
+const timeTables=document.querySelectorAll('.time')
 async function rainGraph(latitude,longitude ){
    try{
    const response=await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
@@ -176,12 +180,56 @@ async function rainGraph(latitude,longitude ){
            }
       const data= await response.json();
       console.log(data)
+    const weatherData = data.list.slice(0, 7);
+      weatherData.forEach((item,index)=>{
+      
+      const time=item.dt_txt.split(" ")[1];
+      const hour=parseInt(time.split(":")[0]);
+      const displayTime=
+        hour>12?`${hour-12}PM`:hour===12?"12PM":`${hour}AM`;
+      
+      bars[index].style.height=`${item.pop * 120}px`;
+      timeTables[index].textContent=`${displayTime}`;
+
+
+   });
    }catch(error){
       console.log(error)
    }
 
 };
-rainGraph(latitude,longitude);
+const theDate=document.querySelectorAll('.topMonday p')[0]
+const image=document.querySelector('.rightMondayImg')
+async function forcastIcon(latitude,longitude) {
+   try{
+         const response=await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
+         if(!response.ok){
+            console.log(response.status)
+         }
+      const data=await response.json();
+      console.log(data.list[0].weather[0].icon)
+      image.src=`https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`;
+      //icon mil gya hai ab baaki cheeze
+      console.log(data.list[0].dt_txt)
+      const dateToday=data.list[0].dt_txt;
+      const numDate=dateToday.split(" ")[0];
+      console.log(numDate)
+      const nowDate=new Date(numDate)
+     const thisDay=nowDate.getDay();
+     console.log(thisDay);
+     weekNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+     const exactDate=weekNames[thisDay]
+     console.log(exactDate)
+     theDate.textContent=exactDate;
+
+
+   }catch(error){
+      console.log(error)
+   }
+
+   
+   
+};
 
 
 

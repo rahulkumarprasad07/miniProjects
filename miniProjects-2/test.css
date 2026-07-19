@@ -6,32 +6,33 @@
 }
 
 
-    :root {
-        --bg-color: #0d1117;
-        --nav-bg: #111111;
-        --text-color: #F5F5F5;
-        --border-color: #333333;
-        --card-bg: #1F1F1F;
-        --primary-color: #3B82F6;
-        --primary-hover: #2563EB;
+:root {
+    --bg-color: #0d1117;
+    --nav-bg: #111111;
+    --text-color: #F5F5F5;
+    --border-color: #333333;
+    --card-bg: #1F1F1F;
+    --primary-color: #3B82F6;
+    --primary-hover: #2563EB;
 
-        --dark-border: #2a2a2a;
-        --light-border: #333333;
-        --search-bg: #514e4e;
+    --dark-border: #2a2a2a;
+    --light-border: #333333;
+    --search-bg: #514e4e;
 
-        --gold: #FFD700;
-        --black: #000000;
-        --white: #FFFFFF;
+    --gold: #FFD700;
+    --black: #000000;
+    --white: #FFFFFF;
 
-        /* Sidebar Buttons */
-        --units: #FFFFFF;
+    /* Sidebar Buttons */
+    --units: #FFFFFF;
 
-        /* Forecast Toggle */
-        --toggle-bg: #898c8f;
-        --toggle-slider: #8eceee;
-        --toggle-text: #5a5c5e;
-        --toggle-active-text: #FFFFFF;
-    }
+    /* Forecast Toggle */
+    --toggle-bg: #898c8f;
+    --toggle-slider: #8eceee;
+    --toggle-text: #5a5c5e;
+    --toggle-active-text: #FFFFFF;
+    --monday-color: rgb(148, 196, 213);
+}
 
 body {
     background: var(--bg-color);
@@ -457,15 +458,15 @@ nav {
 
 }
 
-.days{
-  
-      text-decoration: none;
+.days {
+
+    text-decoration: none;
     color: var(--toggle-text);
     transition: color .3s ease;
 }
 
 
-.days.active{
+.days.active {
     color: var(--toggle-active-text);
 }
 
@@ -489,7 +490,7 @@ nav {
     width: 100px;
     height: 100%;
     border-radius: 12px;
-   background: var(--toggle-slider);
+    background: var(--toggle-slider);
 }
 
 .btnActive {
@@ -500,48 +501,50 @@ nav {
     position: relative;
     z-index: 5;
     font-size: 19px;
-       color: var(--toggle-text);
+    color: var(--toggle-text);
     background-color: transparent;
     border: none;
 }
-.tab.active{
+
+.tab.active {
     color: var(--toggle-active-text);
 }
+
 /* 
 
 midPART */
-.midPart{
+.midPart {
     display: flex;
     gap: 1%;
     padding: 40px 30px;
-    
+
 }
 
-.midrightPart{
+.midrightPart {
     width: 28%;
     font-size: 30px;
     margin-left: 60px;
 }
 
-.graphBox{
+.graphBox {
     display: flex;
     flex-direction: column;
     padding: 20px;
-  padding-left:40px ;
+    padding-left: 40px;
     border-radius: 16px;
     background: var(--card-bg);
 }
 
-.heading{
+.heading {
     margin-bottom: 25px;
 }
 
-.graphArea{
+.graphArea {
     display: flex;
     gap: 20px;
 }
 
-.leftLables ul{
+.leftLables ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -551,46 +554,112 @@ midPART */
     justify-content: space-between;
 }
 
-.leftLables li{
-    font-size: 15px;
+.leftLables li {
+    font-size: 25px;
 }
 
-.rightBars{
+.rightBars {
     display: flex;
     align-items: flex-end;
     gap: 22px;
 }
 
-.bars{
+.bars {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
 }
 
-.barContainer{
+.barContainer {
     width: 24px;
     height: 120px;
 
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;   
+    justify-content: flex-end;
 }
 
-.actualBars{
+.actualBars {
     width: 100%;
-   height: 60px;                /*just pseudo value */
+    height: 60px;
+    /*just pseudo value */
     background: var(--primary-color);
     border-radius: 8px 8px 0 0;
     transition: height .3s ease;
 }
 
-.bars p{
+.bars p {
     font-size: 15px;
     color: var(--text-color);
 }
 
 
+
+/* forcast days */
+.days5Forcast {
+    font-size:18px;
+    height: 190px;
+
+    margin: 20px 0;
+    display: flex;
+    justify-content: flex-start;
+    gap: 35px;
+
+
+}
+
+.monday {
+    display: flex;
+    width: 300px;
+    border-radius: 12px;
+
+
+    flex-direction: column;
+   
+    color: var(--nav-bg);
+    background-color: var(--monday-color);
+
+}
+
+.topMonday {
+    padding: 10px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(104, 173, 198);
+}
+
+.lowerMonday {
+
+    display: flex;
+    
+    justify-content: space-between;
+}
+
+.leftMonday {
+    padding: 10px;
+}
+
+.weekDays {
+    background-color: green;
+    width: 80px;
+    border-radius: 12px;
+    padding: 10px;
+}
+
+.rightMonday {
+   
+    display: flex;
+    flex-direction: column;
+   align-items: flex-start;
+    margin-right: 20px;
+}
+
+.rightMondayImg {
+    height: 90px;
+}
 
 
 
