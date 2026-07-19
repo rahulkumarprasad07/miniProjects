@@ -36,7 +36,7 @@ searchCity.addEventListener('keydown', (event) => {
       const city = searchCity.value;
       async function fetchLocation(city) {
          try {
-            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=7b8caf3b8600898ce30dc1cca7abae07`)
+            const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=`)
             console.log(response);
             const data = await response.json();
             console.log(data);
@@ -74,7 +74,7 @@ navigator.geolocation.getCurrentPosition((position) => {
       //locatin name ka async fn banaua and useme latitide and longitude ki value pass ki
       try {
          //try event chalaya agr try nhi chla toh catach error chlega
-         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=`)
+         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=7b8caf3b8600898ce30dc1cca7abae07`)
          // response mai fetch ka promise store kia precisily await lagane se json form data mila usse response mai save kia
          console.log(response);
          // response ko console mai print kia
@@ -98,8 +98,8 @@ navigator.geolocation.getCurrentPosition((position) => {
    };
    Location(latitude, longitude);
    //functin call kia hai yaha
-   rainGraph(latitude,longitude);
-   forcastIcon(latitude,longitude);
+   rainGraph(latitude, longitude);
+   forcastIcon(latitude, longitude);
 
 
 
@@ -133,102 +133,156 @@ days.forEach((day) => {
    //for each loop lagaya ab ye hr Element jo day ke andr hai uspe chleg and jb koi day click hoga
    day.addEventListener('click', (event) => {
       // jb day click hoga koi specificallly toh fir
-      days.forEach((item)=>{
+      days.forEach((item) => {
          //fir se for each loop chlega iss baar item name rkha hai uske ander ke elements ka nhi toh asame name ho jata
          item.classList.remove('active')
          //uss days ke jitne element hai unn element mai se active class remove hogi
       })
-       day.classList.add('active')
-       //fir jo specific day click hua susme add hogi active class
-        event.preventDefault();
-        //since woh link hai toh page reload ho skta hai jisse prevnt default bachayega
+      day.classList.add('active')
+      //fir jo specific day click hua susme add hogi active class
+      event.preventDefault();
+      //since woh link hai toh page reload ho skta hai jisse prevnt default bachayega
    });
-  
+
 });
 
 
 
 // forcast button
-const tab=document.querySelectorAll('.tab')
-const slider=document.querySelector('.btnUpper')
-tab.forEach((item,index)=>{
+const tab = document.querySelectorAll('.tab')
+const slider = document.querySelector('.btnUpper')
+tab.forEach((item, index) => {
    // tab ke hr element ka kuch index hoga a nd jb click event hoga tab
    // agr index 0 pe click hua toh btnActive hta do upperBtn se jisse woh default state pea aaa jayega
    // aurr agr index 1 hua toh btnActive lga do jisse woh right shift hga
-item.addEventListener('click',()=>{
+   item.addEventListener('click', () => {
 
 
-if(index===0){
-   slider.classList.remove('btnActive')
-}else{
-   slider.classList.add('btnActive')
-}
+      if (index === 0) {
+         slider.classList.remove('btnActive')
+      } else {
+         slider.classList.add('btnActive')
+      }
 
-});
+   });
 });
 
 
 //graph.......//
-const bars=document.querySelectorAll('.actualBars')
-const timeTables=document.querySelectorAll('.time')
-async function rainGraph(latitude,longitude ){
-   try{
-   const response=await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
-           console.log(response)
-           if(!response.ok){
-            console.log(response.status)
-           }
-      const data= await response.json();
+const bars = document.querySelectorAll('.actualBars')
+const timeTables = document.querySelectorAll('.time')
+async function rainGraph(latitude, longitude) {
+   try {
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
+      console.log(response)
+      if (!response.ok) {
+         console.log(response.status)
+      }
+      const data = await response.json();
       console.log(data)
-    const weatherData = data.list.slice(0, 7);
-      weatherData.forEach((item,index)=>{
-      
-      const time=item.dt_txt.split(" ")[1];
-      const hour=parseInt(time.split(":")[0]);
-      const displayTime=
-        hour>12?`${hour-12}PM`:hour===12?"12PM":`${hour}AM`;
-      
-      bars[index].style.height=`${item.pop * 120}px`;
-      timeTables[index].textContent=`${displayTime}`;
+      const weatherData = data.list.slice(0, 7);
+      weatherData.forEach((item, index) => {
+
+         const time = item.dt_txt.split(" ")[1];
+         const hour = parseInt(time.split(":")[0]);
+         const displayTime =
+            hour > 12 ? `${hour - 12}PM` : hour === 12 ? "12PM" : `${hour}AM`;
+
+         bars[index].style.height = `${item.pop * 120}px`;
+         timeTables[index].textContent = `${displayTime}`;
 
 
-   });
-   }catch(error){
+      });
+   } catch (error) {
       console.log(error)
    }
 
 };
-const theDate=document.querySelectorAll('.topMonday p')[0]
-const image=document.querySelector('.rightMondayImg')
-async function forcastIcon(latitude,longitude) {
-   try{
-         const response=await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
-         if(!response.ok){
-            console.log(response.status)
-         }
-      const data=await response.json();
+const theTime = document.querySelector('.topMonday h3')
+const theDate = document.querySelectorAll('.topMonday p')[0]
+const image = document.querySelector('.rightMondayImg')
+async function forcastIcon(latitude, longitude) {
+   try {
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
+      if (!response.ok) {
+         console.log(response.status)
+      }
+      const data = await response.json();
       console.log(data.list[0].weather[0].icon)
-      image.src=`https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`;
+      image.src = `https://openweathermap.org/img/wn/${data.list[0].weather[0].icon}@2x.png`;
       //icon mil gya hai ab baaki cheeze
-      console.log(data.list[0].dt_txt)
-      const dateToday=data.list[0].dt_txt;
-      const numDate=dateToday.split(" ")[0];
+
+      const dateToday = data.list[0].dt_txt;
+      const numDate = dateToday.split(" ")[0];
       console.log(numDate)
-      const nowDate=new Date(numDate)
-     const thisDay=nowDate.getDay();
-     console.log(thisDay);
-     weekNames=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
-     const exactDate=weekNames[thisDay]
-     console.log(exactDate)
-     theDate.textContent=exactDate;
+      const nowDate = new Date(numDate)
+      const thisDay = nowDate.getDay();
+      console.log(thisDay);
+      weekNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      const exactDate = weekNames[thisDay]
+      console.log(exactDate)
+      theDate.textContent = exactDate;
+      //ab time ki baari
+      //hours
+      console.log(data.list[0].dt_txt)
+      const timeToday = data.list[0].dt_txt;
+      const numTime = timeToday.split(" ")[1];
+      const nowTime = numTime.split(":")[0]
+      const meanTime = parseInt(nowTime)
+
+      console.log(meanTime)
+      //minutes
+      const nowMinutes = numTime.split(":")[1]
+
+      //adding both
 
 
-   }catch(error){
+
+
+
+
+
+
+
+
+
+
+
+
+      const period = meanTime >= 12 ? "PM" : "AM";
+
+      const displayHour =
+         meanTime > 12 ? meanTime - 12 :
+            meanTime === 0 ? 12 :
+               meanTime;
+
+      const exactTime = `${displayHour}:${nowMinutes} ${period}`;
+
+      theTime.textContent = exactTime;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   } catch (error) {
       console.log(error)
    }
 
-   
-   
+
+
 };
 
 
