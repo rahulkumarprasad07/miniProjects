@@ -166,5 +166,23 @@ if(index===0){
 });
 
 
+//graph.......//
+async function rainGraph(latitude,longitude ){
+   try{
+   const response=await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
+           console.log(response)
+           if(!response.ok){
+            console.log(response.status)
+           }
+      const data= await response.json();
+      console.log(data)
+   }catch(error){
+      console.log(error)
+   }
+
+};
+rainGraph(latitude,longitude);
+
+
 
 

@@ -5,24 +5,33 @@
     box-sizing: border-box;
 }
 
-:root{
-    --bg-color: #0d1117;
-    --nav-bg: #111111;
-    --text-color: #F5F5F5;
-    --border-color: #333333;
-    --card-bg: #1F1F1F;
-    --primary-color: #3B82F6;
-    --primary-hover: #2563EB;
 
-    --dark-border: #2a2a2a;
-    --light-border: #333333;
-    --search-bg: #514e4e;
-    --white: #FFFFFF;
-    --gold: #FFD700;
-    --black:#000000;
-    --grey:#8f8686;
-    --skyBlue:#8eceee;
-}
+    :root {
+        --bg-color: #0d1117;
+        --nav-bg: #111111;
+        --text-color: #F5F5F5;
+        --border-color: #333333;
+        --card-bg: #1F1F1F;
+        --primary-color: #3B82F6;
+        --primary-hover: #2563EB;
+
+        --dark-border: #2a2a2a;
+        --light-border: #333333;
+        --search-bg: #514e4e;
+
+        --gold: #FFD700;
+        --black: #000000;
+        --white: #FFFFFF;
+
+        /* Sidebar Buttons */
+        --units: #FFFFFF;
+
+        /* Forecast Toggle */
+        --toggle-bg: #898c8f;
+        --toggle-slider: #8eceee;
+        --toggle-text: #5a5c5e;
+        --toggle-active-text: #FFFFFF;
+    }
 
 body {
     background: var(--bg-color);
@@ -30,8 +39,9 @@ body {
     width: 100vw;
     color: var(--text-color);
 }
-body.light-theme{
-       --bg-color: #F8FAFC;
+
+body.light-theme {
+    --bg-color: #F8FAFC;
     --nav-bg: #FFFFFF;
     --text-color: #1F2937;
     --border-color: #D1D5DB;
@@ -42,11 +52,16 @@ body.light-theme{
     --dark-border: #E5E7EB;
     --light-border: #CBD5E1;
     --search-bg: #F1F5F9;
-    --white: #ffffff;
+
     --gold: #FFD700;
-    --black:#000000;
-     --skyBlue:#8eceee;
-        --grey:#8f8686;
+    --black: #000000;
+    --white: #FFFFFF;
+
+    /* Segmented Toggle */
+    --toggle-bg: #6e7277;
+    --toggle-slider: #3B82F6;
+    --toggle-text: #a7b8d1;
+    --toggle-active-text: #000000;
 }
 
 nav {
@@ -73,7 +88,7 @@ nav {
     gap: 100px;
 }
 
-.rightNav{
+.rightNav {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -122,7 +137,7 @@ nav {
     border: 1px solid var(--light-border);
 }
 
-.icon.i3 span{
+.icon.i3 span {
     font-size: 18px;
 }
 
@@ -178,14 +193,14 @@ nav {
     transform: rotate(180deg);
 }
 
-.icon.i6{
+.icon.i6 {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 }
 
-.icon.i6 img{
+.icon.i6 img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -218,6 +233,7 @@ nav {
 .premium i {
     color: var(--gold);
 }
+
 .premium:hover {
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 12px 30px rgba(37, 99, 235, .45);
@@ -228,11 +244,11 @@ nav {
     transform: scale(.98);
 }
 
-.sideBar{
+.sideBar {
     background: var(--nav-bg);
     border-right: 1px solid var(--dark-border);
     position: fixed;
-    top:0;
+    top: 0;
     left: -300px;
     height: 100vh;
     width: 300px;
@@ -242,59 +258,59 @@ nav {
     z-index: 1000;
 }
 
-.sideBar.sidebarActive{
+.sideBar.sidebarActive {
     left: 0;
 }
 
-.logo{
+.logo {
     margin: 20px 0px;
 }
 
-.logo h2 span:first-child{
+.logo h2 span:first-child {
     color: rgb(236, 175, 61);
 }
 
-.sideBar h2{
+.sideBar h2 {
     text-align: center;
 }
 
-.profile{
+.profile {
     margin: 20px 0;
     display: flex;
     align-items: center;
     gap: 15px;
 }
 
-.profile img{
+.profile img {
     height: 80px;
     width: 80px;
     border-radius: 50%;
     transition: transform 0.3s ease;
 }
 
-.pfpText{
+.pfpText {
     cursor: pointer;
     transition: all 0.3s ease-in;
 }
 
-.pfpText:hover{
+.pfpText:hover {
     text-decoration: underline;
 }
 
-.profile img:hover{
+.profile img:hover {
     transform: scale(1.08);
 }
 
-.navigation{
+.navigation {
     margin: 20px 0px;
 }
 
-.navigation ul{
+.navigation ul {
     list-style: none;
     margin: 10px 0;
 }
 
-.navigation a{
+.navigation a {
     display: block;
     text-decoration: none;
     color: var(--text-color);
@@ -305,25 +321,25 @@ nav {
     padding: 8px 12px;
 }
 
-.navigation a:hover{
+.navigation a:hover {
     background: #1F2937;
     color: var(--primary-color);
     transform: translateX(6px);
 }
 
-.navigation a i{
+.navigation a i {
     margin-right: 5px;
 }
 
-.navigation a:hover i{
+.navigation a:hover i {
     color: var(--primary-color);
 }
 
-.parentPreferences{
+.parentPreferences {
     margin: 20px 0;
 }
 
-.preferences{
+.preferences {
     margin: 10px 0;
     font-size: 18px;
     display: flex;
@@ -331,43 +347,46 @@ nav {
     align-items: start;
 }
 
-.units{
-    background:var(--white) ;
+.units {
+    background: var(--units);
     margin: 8px 0;
     height: 30px;
     width: 60px;
     transition: all 0.3s ease;
     cursor: pointer;
-}
-.theme{
-    background:var(--white) ;
-    color: var(--black,black);
-    margin: 8px 0;
-    height: 30px;
-    width: 60px;
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-.themeActive{
-     background:var(--black) ;
-   color:var(--white)
-}
-.preferences button:hover{
-    background: var(--primary-color);
-    color: var(--white);
 }
 
-.preferences a{
+.theme {
+    background: var(--units);
+    color: black;
+    margin: 8px 0;
+    height: 30px;
+    width: 60px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.themeActive {
+    background: var(--black);
+    color: var(--units)
+}
+
+.preferences button:hover {
+    background: var(--primary-color);
+    color: var(--units);
+}
+
+.preferences a {
     text-decoration: none;
     color: var(--text-color);
     transition: all 0.3s ease;
 }
 
-.preferences a:hover{
+.preferences a:hover {
     color: var(--primary-color);
 }
 
-.lastSection{
+.lastSection {
     margin: 20px 0;
     font-size: 18px;
     display: flex;
@@ -375,12 +394,12 @@ nav {
     gap: 10px;
 }
 
-.lastSection a{
+.lastSection a {
     color: var(--text-color);
 }
 
-.premiumBox{
-    height:30px;
+.premiumBox {
+    height: 30px;
     width: 150px;
     background: var(--primary-hover);
     border-radius: 12px;
@@ -392,68 +411,77 @@ nav {
     cursor: pointer;
 }
 
-.premiumBox:hover{
+.premiumBox:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(37,99,235,.35);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, .35);
 }
 
-.premSide a{
+.premSide a {
     font-size: 20px;
     text-decoration: none;
 }
 
-.premSide a i{
+.premSide a i {
     color: var(--gold);
     margin-right: 3px;
 }
 
 .lastSection a,
-.lastSection h4{
+.lastSection h4 {
     transition: all 0.3s ease;
 }
 
 .lastSection a:hover,
-.lastSection h4:hover{
+.lastSection h4:hover {
     color: var(--gold);
 }
-.midleftPart{
+
+.midleftPart {
     width: 68%;
     font-size: 30px;
-    
-    color:var(--white);
+
+    color: var(--units);
 }
-.subNav{
+
+.subNav {
     display: flex;
     justify-content: space-between;
-    
-    padding: 10px 15px;
-    margin: 1%;
+
+    /* padding: 10px 15px; */
 }
-.list ul{
+
+.list ul {
     display: flex;
     list-style: none;
     gap: 20px;
-    
+
 }
+
 .days{
-    color: var(--grey);
-    text-decoration: none;
+  
+      text-decoration: none;
+    color: var(--toggle-text);
+    transition: color .3s ease;
 }
-.active{
-    color: var(--white);
+
+
+.days.active{
+    color: var(--toggle-active-text);
 }
-.btnLower{
+
+.btnLower {
     width: 200px;
     display: flex;
     position: relative;
     justify-content: space-between;
     align-items: center;
-   font-size: 25px;
-   padding: 8px;
-    background: var(--grey);
+    font-size: 25px;
+    padding: 8px;
+    background: var(--toggle-bg);
     border-radius: 12px;
 }
-.btnUpper{
+
+.btnUpper {
     position: absolute;
     top: 0;
     left: 0;
@@ -461,18 +489,109 @@ nav {
     width: 100px;
     height: 100%;
     border-radius: 12px;
-    background:var(--skyBlue);
+   background: var(--toggle-slider);
 }
-.btnActive{
-   transform: translateX(100px);
+
+.btnActive {
+    transform: translateX(100px);
 }
-.tab{
+
+.tab {
     position: relative;
     z-index: 5;
-   font-size: 19px;
-   background-color: transparent;
-   border: none;
+    font-size: 19px;
+       color: var(--toggle-text);
+    background-color: transparent;
+    border: none;
 }
+.tab.active{
+    color: var(--toggle-active-text);
+}
+/* 
+
+midPART */
+.midPart{
+    display: flex;
+    gap: 1%;
+    padding: 40px 30px;
+    
+}
+
+.midrightPart{
+    width: 28%;
+    font-size: 30px;
+    margin-left: 60px;
+}
+
+.graphBox{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  padding-left:40px ;
+    border-radius: 16px;
+    background: var(--card-bg);
+}
+
+.heading{
+    margin-bottom: 25px;
+}
+
+.graphArea{
+    display: flex;
+    gap: 20px;
+}
+
+.leftLables ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.leftLables li{
+    font-size: 15px;
+}
+
+.rightBars{
+    display: flex;
+    align-items: flex-end;
+    gap: 22px;
+}
+
+.bars{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.barContainer{
+    width: 24px;
+    height: 120px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;   
+}
+
+.actualBars{
+    width: 100%;
+   height: 60px;                /*just pseudo value */
+    background: var(--primary-color);
+    border-radius: 8px 8px 0 0;
+    transition: height .3s ease;
+}
+
+.bars p{
+    font-size: 15px;
+    color: var(--text-color);
+}
+
+
+
 
 
 
@@ -532,12 +651,13 @@ nav {
         height: 40px;
 
     }
-    .icon.i3 span{
+
+    .icon.i3 span {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-    font-size: 12px;
-}
+        font-size: 12px;
+    }
 
     .icon.i3 i {
         font-size: 15px;
@@ -577,46 +697,55 @@ nav {
     .icon.i5 {
         display: none;
     }
-    .icon.i6{
+
+    .icon.i6 {
         height: 38px;
         width: 38px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-/* sidebar............ */
-.sideBar{
-    width: 200px;
-}
-.sideBar h2{
-    font-size: 24px;
-}
-.profile img{
-    height: 60px;
-    width: 60px;
-}
-.navigation a{
-    font-size: 14px;
-    line-height: 18px;
-    
-    
-}
-.preferences{
-    font-size: 14px;
-    margin: 7px 0;
-}
-.lastSection{
-    font-size: 14px;
-    margin: 7px 0;
-}
-.premiumBox{
-    height: 25px;
-    width: 120px;
-    
-}
-.premiumBox a{
-    font-size: 18px;
-}
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* sidebar............ */
+    .sideBar {
+        width: 200px;
+    }
+
+    .sideBar h2 {
+        font-size: 24px;
+    }
+
+    .profile img {
+        height: 60px;
+        width: 60px;
+    }
+
+    .navigation a {
+        font-size: 14px;
+        line-height: 18px;
+
+
+    }
+
+    .preferences {
+        font-size: 14px;
+        margin: 7px 0;
+    }
+
+    .lastSection {
+        font-size: 14px;
+        margin: 7px 0;
+    }
+
+    .premiumBox {
+        height: 25px;
+        width: 120px;
+
+    }
+
+    .premiumBox a {
+        font-size: 18px;
+    }
 
 }
 
@@ -671,12 +800,12 @@ nav {
         font-size: 16px;
     }
 
-    .icon.i3 span{
+    .icon.i3 span {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-    font-size: 10px;
-         }
+        font-size: 10px;
+    }
 
 
     .icon.i4 {
@@ -714,88 +843,88 @@ nav {
     }
 
     /* sidebar.......... */
-    
-       .sideBar{
-    width: 80vw;
-    padding: 15px;
-}
 
-.logo{
-    margin: 15px 0;
-}
-
-.logo h2{
-    font-size: 22px;
-}
-
-.profile{
-    gap: 10px;
-    margin: 15px 0;
-}
-
-.profile img{
-    width: 50px;
-    height: 50px;
-}
-
-.profile h3{
-    font-size: 16px;
-}
-
-.profile p{
-    font-size: 13px;
-}
-
-.navigation{
-    margin: 15px 0;
-}
-
-.navigation h2,
-.parentPreferences h2{
-    font-size: 18px;
-}
-
-.navigation a{
-    font-size: 14px;
-    padding: 8px 0;
-}
-
-.navigation a i{
-    margin-right: 8px;
-}
-
-.preferences{
-    margin: 8px 0;
-    gap: 8px;
-    font-size: 14px;
-}
-
-.preferences button{
-    width: 100%;
-    padding: 8px;
-    font-size: 13px;
-}
-
-.preferences a{
-    font-size: 14px;
-}
-
-.premiumBox{
-    width: 100%;
-    height: 35px;
-}
-
-.premSide a{
-    font-size: 15px;
-}
-
-.lastSection{
-    margin: 15px 0;
-    gap: 8px;
-    font-size: 14px;
-}
-
-.lastSection h4{
-    font-size: 14px;
-}
+    .sideBar {
+        width: 80vw;
+        padding: 15px;
     }
+
+    .logo {
+        margin: 15px 0;
+    }
+
+    .logo h2 {
+        font-size: 22px;
+    }
+
+    .profile {
+        gap: 10px;
+        margin: 15px 0;
+    }
+
+    .profile img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .profile h3 {
+        font-size: 16px;
+    }
+
+    .profile p {
+        font-size: 13px;
+    }
+
+    .navigation {
+        margin: 15px 0;
+    }
+
+    .navigation h2,
+    .parentPreferences h2 {
+        font-size: 18px;
+    }
+
+    .navigation a {
+        font-size: 14px;
+        padding: 8px 0;
+    }
+
+    .navigation a i {
+        margin-right: 8px;
+    }
+
+    .preferences {
+        margin: 8px 0;
+        gap: 8px;
+        font-size: 14px;
+    }
+
+    .preferences button {
+        width: 100%;
+        padding: 8px;
+        font-size: 13px;
+    }
+
+    .preferences a {
+        font-size: 14px;
+    }
+
+    .premiumBox {
+        width: 100%;
+        height: 35px;
+    }
+
+    .premSide a {
+        font-size: 15px;
+    }
+
+    .lastSection {
+        margin: 15px 0;
+        gap: 8px;
+        font-size: 14px;
+    }
+
+    .lastSection h4 {
+        font-size: 14px;
+    }
+}
