@@ -649,10 +649,14 @@ midPART */
 }
 
 .weekDays {
-    background-color: green;
+  background: var(--card-bg);
     width: 80px;
     border-radius: 12px;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    
+    
 }
 
 .rightMonday {

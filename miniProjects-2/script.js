@@ -100,7 +100,7 @@ navigator.geolocation.getCurrentPosition((position) => {
    //functin call kia hai yaha
    rainGraph(latitude, longitude);
    forcastIcon(latitude, longitude);
-   mondayFeat(latitude,longitude);
+   mondayFeat(latitude, longitude);
 
 
 
@@ -199,7 +199,7 @@ async function rainGraph(latitude, longitude) {
    }
 
 };
-const theTime = document.querySelector('.topMonday h3')
+
 const theDate = document.querySelectorAll('.topMonday p')[0]
 const image = document.querySelector('.rightMondayImg')
 async function forcastIcon(latitude, longitude) {
@@ -223,31 +223,7 @@ async function forcastIcon(latitude, longitude) {
       const exactDate = weekNames[thisDay]
       console.log(exactDate)
       theDate.textContent = exactDate;
-      //ab time ki baari
-      //hours
-      // console.log(data.list[0].dt_txt)
-      // const timeToday = data.list[0].dt_txt;
-      // const numTime = timeToday.split(" ")[1];
-      // const nowTime = numTime.split(":")[0]
-      // const meanTime = parseInt(nowTime)
 
-      // console.log(meanTime)
-      // //minutes
-      // const nowMinutes = numTime.split(":")[1]
-
-      // //adding both
-
-
-      // const period = meanTime >= 12 ? "PM" : "AM";
-
-      // const displayHour =
-      //    meanTime > 12 ? meanTime - 12 :
-      //       meanTime === 0 ? 12 :
-      //          meanTime;
-
-      // const exactTime = `${displayHour}:${nowMinutes} ${period}`;
-
-      // theTime.textContent = exactTime;
 
 
 
@@ -255,55 +231,80 @@ async function forcastIcon(latitude, longitude) {
    } catch (error) {
       console.log(error)
    }
+   const theTime = document.querySelector('.topMonday h3')
 
+   function currentTime() {
+      const actualTime = new Date();
 
+      const theActualHours = actualTime.getHours();
+      const displayHour =
+         theActualHours > 12 ? theActualHours - 12 :
+            theActualHours === 0 ? 12 :
+               theActualHours;
+
+      const period = theActualHours >= 12 ? "PM" : "AM";
+
+      const theActualMinutes = actualTime.getMinutes();
+
+      if (theActualMinutes < 10) {
+         theTime.textContent = displayHour + ":" + "0" + theActualMinutes + " " + period;
+      } else {
+         theTime.textContent = displayHour + ":" + theActualMinutes + " " + period;
+      }
+   }
+   currentTime();
+   setInterval(currentTime, 6000)
 
 };
-const temperature=document.querySelectorAll('.leftMonday h1')
-const wind=document.querySelectorAll('.valuesMonday')[0]
-const pressure=document.querySelectorAll('.valuesMonday')[1]
-const Humidity=document.querySelectorAll('.valuesMonday')[2]
-const sunrise=document.querySelectorAll('.mondaySunInfo span')[0]
-const sunset=document.querySelectorAll('.mondaySunInfo span')[1]
+const temperature = document.querySelector('.leftMonday h1')
+const wind = document.querySelectorAll('.valuesMonday')[0]
+const pressure = document.querySelectorAll('.valuesMonday')[1]
+const Humidity = document.querySelectorAll('.valuesMonday')[2]
+const sunrise = document.querySelectorAll('.mondaySunInfo span')[0]
+const sunset = document.querySelectorAll('.mondaySunInfo span')[1]
 
-async function mondayFeat(latitude,longitude) {
-   try{
-   const response=await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
-   console.log(response)
-   const data=await response.json(); 
-   console.log(data)
-   console.log(data.list[0].main.temp)
-   console.log(data.list[0].main.humidity)
-   console.log(data.list[0].main.pressure)
-     console.log(data.list[0].wind.speed)
-     console.log(data.city.sunrise)
-     console.log(data.city.sunset)
-     //temp Done
-     const temperatureData=parseInt(data.list[0].main.temp);
-     const tempCelcius=Math.round(temperatureData-273.15)
-     temperature.textContent=tempCelcius;
-     //wind
-    const windSpeed=data.list[0].wind.speed;
-    wind.textContent=windSpeed+"m/s"
-    //humidity
-    const humidity=data.list[0].main.humidity
-    Humidity.textContent=humidity+"%"
-    //pressure
-    const pressureData=data.list[0].main.pressure
-    pressure.textContent=pressureData+"hPa"
-    //sunrise
-    const sunriseContent=data.city.sunrise
-   const sunRiseData=Math.round(parseInt(sunriseContent))*1000;
-   const sunMorning= new Date(sunRiseData)
-         sunrise.textContent=sunMorning.getHours()+":"+sunMorning.getMinutes();
-    //sunset
-           const sunSetContent=data.city.sunset
-   const sunSetData=Math.round(parseInt(sunSetContent))*1000;
-   const sunEvening= new Date(sunSetData)
-         sunset.textContent=sunEvening.getHours()+":"+sunMorning.getMinutes();
-    
+async function mondayFeat(latitude, longitude) {
+   try {
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
+      console.log(response)
+      const data = await response.json();
+      console.log(data)
+      console.log(data.list[0].main.temp)
+      console.log(data.list[0].main.humidity)
+      console.log(data.list[0].main.pressure)
+      console.log(data.list[0].wind.speed)
+      console.log(data.city.sunrise)
+      console.log(data.city.sunset)
+      //temp Done
+      const temperatureData = parseInt(data.list[0].main.temp);
+      const tempCelcius = Math.round(temperatureData - 273.15)
+      temperature.textContent = tempCelcius;
+      //wind
+      const windSpeed = data.list[0].wind.speed;
+      wind.textContent = windSpeed + "m/s"
+      //humidity
+      const humidity = data.list[0].main.humidity
+      Humidity.textContent = humidity + "%"
+      //pressure
+      const pressureData = data.list[0].main.pressure
+      pressure.textContent = pressureData + "hPa"
+      //sunrise
+      const sunriseContent = data.city.sunrise
+      const sunRiseData = Math.round(parseInt(sunriseContent)) * 1000;
+      const sunMorning = new Date(sunRiseData)
+      sunrise.textContent = sunMorning.getHours() + ":" + sunMorning.getMinutes();
+      //sunset
+      const sunSetContent = data.city.sunset
+      const sunSetData = Math.round(parseInt(sunSetContent)) * 1000;
+      const sunEvening = new Date(sunSetData)
+      sunset.textContent = sunEvening.getHours() + ":" + sunMorning.getMinutes();
 
-}catch(error){
-   console.log(error)
+
+   } catch (error) {
+      console.log(error)
+   }
 }
-}
+
+
+
+\\weekdays
