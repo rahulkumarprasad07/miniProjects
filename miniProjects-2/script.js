@@ -74,7 +74,7 @@ navigator.geolocation.getCurrentPosition((position) => {
       //locatin name ka async fn banaua and useme latitide and longitude ki value pass ki
       try {
          //try event chalaya agr try nhi chla toh catach error chlega
-         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=7b8caf3b8600898ce30dc1cca7abae07`)
+         const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=`)
          // response mai fetch ka promise store kia precisily await lagane se json form data mila usse response mai save kia
          console.log(response);
          // response ko console mai print kia
@@ -100,6 +100,7 @@ navigator.geolocation.getCurrentPosition((position) => {
    //functin call kia hai yaha
    rainGraph(latitude, longitude);
    forcastIcon(latitude, longitude);
+   mondayFeat(latitude,longitude);
 
 
 
@@ -173,7 +174,7 @@ const bars = document.querySelectorAll('.actualBars')
 const timeTables = document.querySelectorAll('.time')
 async function rainGraph(latitude, longitude) {
    try {
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
       console.log(response)
       if (!response.ok) {
          console.log(response.status)
@@ -218,61 +219,35 @@ async function forcastIcon(latitude, longitude) {
       const nowDate = new Date(numDate)
       const thisDay = nowDate.getDay();
       console.log(thisDay);
-      weekNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+      const weekNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
       const exactDate = weekNames[thisDay]
       console.log(exactDate)
       theDate.textContent = exactDate;
       //ab time ki baari
       //hours
-      console.log(data.list[0].dt_txt)
-      const timeToday = data.list[0].dt_txt;
-      const numTime = timeToday.split(" ")[1];
-      const nowTime = numTime.split(":")[0]
-      const meanTime = parseInt(nowTime)
+      // console.log(data.list[0].dt_txt)
+      // const timeToday = data.list[0].dt_txt;
+      // const numTime = timeToday.split(" ")[1];
+      // const nowTime = numTime.split(":")[0]
+      // const meanTime = parseInt(nowTime)
 
-      console.log(meanTime)
-      //minutes
-      const nowMinutes = numTime.split(":")[1]
+      // console.log(meanTime)
+      // //minutes
+      // const nowMinutes = numTime.split(":")[1]
 
-      //adding both
-
-
+      // //adding both
 
 
+      // const period = meanTime >= 12 ? "PM" : "AM";
 
+      // const displayHour =
+      //    meanTime > 12 ? meanTime - 12 :
+      //       meanTime === 0 ? 12 :
+      //          meanTime;
 
+      // const exactTime = `${displayHour}:${nowMinutes} ${period}`;
 
-
-
-
-
-
-
-
-      const period = meanTime >= 12 ? "PM" : "AM";
-
-      const displayHour =
-         meanTime > 12 ? meanTime - 12 :
-            meanTime === 0 ? 12 :
-               meanTime;
-
-      const exactTime = `${displayHour}:${nowMinutes} ${period}`;
-
-      theTime.textContent = exactTime;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      // theTime.textContent = exactTime;
 
 
 
@@ -284,7 +259,51 @@ async function forcastIcon(latitude, longitude) {
 
 
 };
+const temperature=document.querySelectorAll('.leftMonday h1')
+const wind=document.querySelectorAll('.valuesMonday')[0]
+const pressure=document.querySelectorAll('.valuesMonday')[1]
+const Humidity=document.querySelectorAll('.valuesMonday')[2]
+const sunrise=document.querySelectorAll('.mondaySunInfo span')[0]
+const sunset=document.querySelectorAll('.mondaySunInfo span')[1]
 
+async function mondayFeat(latitude,longitude) {
+   try{
+   const response=await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
+   console.log(response)
+   const data=await response.json(); 
+   console.log(data)
+   console.log(data.list[0].main.temp)
+   console.log(data.list[0].main.humidity)
+   console.log(data.list[0].main.pressure)
+     console.log(data.list[0].wind.speed)
+     console.log(data.city.sunrise)
+     console.log(data.city.sunset)
+     //temp Done
+     const temperatureData=parseInt(data.list[0].main.temp);
+     const tempCelcius=Math.round(temperatureData-273.15)
+     temperature.textContent=tempCelcius;
+     //wind
+    const windSpeed=data.list[0].wind.speed;
+    wind.textContent=windSpeed+"m/s"
+    //humidity
+    const humidity=data.list[0].main.humidity
+    Humidity.textContent=humidity+"%"
+    //pressure
+    const pressureData=data.list[0].main.pressure
+    pressure.textContent=pressureData+"hPa"
+    //sunrise
+    const sunriseContent=data.city.sunrise
+   const sunRiseData=Math.round(parseInt(sunriseContent))*1000;
+   const sunMorning= new Date(sunRiseData)
+         sunrise.textContent=sunMorning.getHours()+":"+sunMorning.getMinutes();
+    //sunset
+           const sunSetContent=data.city.sunset
+   const sunSetData=Math.round(parseInt(sunSetContent))*1000;
+   const sunEvening= new Date(sunSetData)
+         sunset.textContent=sunEvening.getHours()+":"+sunMorning.getMinutes();
+    
 
-
-
+}catch(error){
+   console.log(error)
+}
+}

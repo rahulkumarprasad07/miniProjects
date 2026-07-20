@@ -598,7 +598,7 @@ midPART */
 
 /* forcast days */
 .days5Forcast {
-    font-size:18px;
+    font-size:17px;
     height: 190px;
 
     margin: 20px 0;
@@ -637,9 +637,15 @@ midPART */
     
     justify-content: space-between;
 }
-
+.valuesMonday,.mondaySunInfo span{
+    font-size: 15px;
+    color:var(--toggle-text)
+}
 .leftMonday {
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .weekDays {
