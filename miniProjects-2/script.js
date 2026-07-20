@@ -306,5 +306,21 @@ async function mondayFeat(latitude, longitude) {
 }
 
 
+//weekdays
+const weekdays=document.querySelectorAll('.weekDays')
+const tuesday=document.querySelectorAll('.weekDays p')[0]
+const tuesdayImg=document.querySelectorAll('.weekDays img')[0]
+const tuesdayHeading=document.querySelectorAll('.weekDays h3')[0]
 
-\\weekdays
+const wednesday=document.querySelectorAll('.weekDays p')[1]
+const wednesdayImg=document.querySelectorAll('.weekDays img')[1]
+const wednesdayHeading=document.querySelectorAll('.weekDays h3')[1]
+
+const thursday=document.querySelectorAll('.weekDays p')[2]
+const thursdayImg=document.querySelectorAll('.weekDays img')[2]
+const thursdayHeading=document.querySelectorAll('.weekDays h3')[2]
+
+
+const friday=document.querySelectorAll('.weekDays p')[3]
+const fridayImg=document.querySelectorAll('.weekDays img')[3]
+const fridayHeading=document.querySelectorAll('.weekDays h3')[3]
