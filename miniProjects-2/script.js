@@ -444,4 +444,4 @@ function mapLocation(latitude, longitude) {
 
 
 
-const dataBoxH1=document.querySelectorAll('.dBLeft h3')
+const dataBoxH1=document.querySelectorAll('.dBLeft h')
