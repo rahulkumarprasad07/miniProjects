@@ -28,18 +28,30 @@ document.addEventListener('click', (event) => {
 
 // navbar.............
 const searchCity = document.getElementById('searchCity');
-
-searchCity.addEventListener('keydown', (event) => {
+console.log("its working")
+searchCity.onkeydown = function (event) {
    console.log(event.key);
    if (event.key === "Enter") {
       console.log(searchCity.value)
       const city = searchCity.value;
       async function fetchLocation(city) {
+         console.log("function called")
          try {
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=`)
             console.log(response);
             const data = await response.json();
             console.log(data);
+            console.log(data.coord.lon)
+            console.log(data.coord.lat)
+            let latitude = data.coord.lat
+            let longitude = data.coord.lon
+
+
+            mapLocation(latitude, longitude)
+            
+
+
+
             if (!response.ok) {
                console.log(response.status)
             }
@@ -51,8 +63,9 @@ searchCity.addEventListener('keydown', (event) => {
 
       fetchLocation(city);
 
+
    }
-})
+}
 const currentLocation = document.getElementById('currentLocation')
 // currentLocation ka variable banya
 const sideCurrentLocation = document.getElementById('sideCurrentLocation')
@@ -101,7 +114,9 @@ navigator.geolocation.getCurrentPosition((position) => {
    rainGraph(latitude, longitude);
    forcastIcon(latitude, longitude);
    mondayFeat(latitude, longitude);
-    weekdaysEditing(latitude,longitude);
+   weekdaysEditing(latitude, longitude);
+   initMap(latitude, longitude);
+
 
 
 
@@ -224,27 +239,27 @@ async function forcastIcon(latitude, longitude) {
       const exactDate = weekNames[thisDay]
       console.log(exactDate)
       theDate.textContent = exactDate;
-     
+
       //PRINTING INCON IN WEEKDAYS TUESDAY
       console.log("its tuesday icon")
       console.log(data.list[1].weather[0].icon)
-      tuesdayImg.src= `https://openweathermap.org/img/wn/${data.list[1].weather[0].icon}@2x.png`;
+      tuesdayImg.src = `https://openweathermap.org/img/wn/${data.list[1].weather[0].icon}@2x.png`;
 
       //printing icon in weekdays wed
-        console.log("its Wednesday icon")
+      console.log("its Wednesday icon")
       console.log(data.list[9].weather[0].icon)
-      wednesdayImg.src= `https://openweathermap.org/img/wn/${data.list[9].weather[0].icon}@2x.png`;
+      wednesdayImg.src = `https://openweathermap.org/img/wn/${data.list[9].weather[0].icon}@2x.png`;
 
 
       //printing icon in weekdays thu
-       console.log("its thursday icon")
+      console.log("its thursday icon")
       console.log(data.list[17].weather[0].icon)
-      thursdayImg.src= `https://openweathermap.org/img/wn/${data.list[17].weather[0].icon}@2x.png`;
+      thursdayImg.src = `https://openweathermap.org/img/wn/${data.list[17].weather[0].icon}@2x.png`;
 
-       //printing icon in weekdays thu
-         console.log("its friday icon")
+      //printing icon in weekdays thu
+      console.log("its friday icon")
       console.log(data.list[25].weather[0].icon)
-      fridayImg.src= `https://openweathermap.org/img/wn/${data.list[25].weather[0].icon}@2x.png`;
+      fridayImg.src = `https://openweathermap.org/img/wn/${data.list[25].weather[0].icon}@2x.png`;
 
 
 
@@ -289,7 +304,7 @@ async function mondayFeat(latitude, longitude) {
       const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
       console.log(response)
       const data = await response.json();
-    
+
       //temp Done
       const temperatureData = parseInt(data.list[0].main.temp);
       const tempCelcius = Math.round(temperatureData - 273.15)
@@ -322,80 +337,111 @@ async function mondayFeat(latitude, longitude) {
 
 
 //weekdays
-const weekdays=document.querySelectorAll('.weekDays')
-const tuesday=document.querySelectorAll('.weekDays p')[0]
-const tuesdayImg=document.querySelectorAll('.weekDays img')[0]
-const tuesdayHeading=document.querySelectorAll('.weekDays h2')[0]
+const weekdays = document.querySelectorAll('.weekDays')
+const tuesday = document.querySelectorAll('.weekDays p')[0]
+const tuesdayImg = document.querySelectorAll('.weekDays img')[0]
+const tuesdayHeading = document.querySelectorAll('.weekDays h2')[0]
 
-const wednesday=document.querySelectorAll('.weekDays p')[1]
-const wednesdayImg=document.querySelectorAll('.weekDays img')[1]
-const wednesdayHeading=document.querySelectorAll('.weekDays h2')[1]
+const wednesday = document.querySelectorAll('.weekDays p')[1]
+const wednesdayImg = document.querySelectorAll('.weekDays img')[1]
+const wednesdayHeading = document.querySelectorAll('.weekDays h2')[1]
 
-const thursday=document.querySelectorAll('.weekDays p')[2]
-const thursdayImg=document.querySelectorAll('.weekDays img')[2]
-const thursdayHeading=document.querySelectorAll('.weekDays h2')[2]
+const thursday = document.querySelectorAll('.weekDays p')[2]
+const thursdayImg = document.querySelectorAll('.weekDays img')[2]
+const thursdayHeading = document.querySelectorAll('.weekDays h2')[2]
 
 
-const friday=document.querySelectorAll('.weekDays p')[3]
-const fridayImg=document.querySelectorAll('.weekDays img')[3]
-const fridayHeading=document.querySelectorAll('.weekDays h2')[3]
+const friday = document.querySelectorAll('.weekDays p')[3]
+const fridayImg = document.querySelectorAll('.weekDays img')[3]
+const fridayHeading = document.querySelectorAll('.weekDays h2')[3]
 
-async function weekdaysEditing(latitude,longitude) {
-   try{
-      const response=await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
-      const data=await response.json();
+async function weekdaysEditing(latitude, longitude) {
+   try {
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
+      const data = await response.json();
       console.log(data.list)
 
       //TUE DEFINED
-    console.log(data.list[1].dt_txt)
-   const dateToday=data.list[1].dt_txt
-   const myDate=dateToday.split(" ")[0]
-   const itsDate=new Date(myDate)
-   const oohDate=itsDate.getDay();
-   console.log(oohDate)
-   const weekDaysAre=["Sun","Mon","Tue","wed","Thu","Fri","Sat"]
-   tuesday.textContent=weekDaysAre[oohDate]
-//tue temp
-   console.log(data.list[1].main.temp)
-   const tempData=Math.round(data.list[1].main.temp-273.15)
-   tuesdayHeading.textContent=tempData
+      console.log(data.list[1].dt_txt)
+      const dateToday = data.list[1].dt_txt
+      const myDate = dateToday.split(" ")[0]
+      const itsDate = new Date(myDate)
+      const oohDate = itsDate.getDay();
+      console.log(oohDate)
+      const weekDaysAre = ["Sun", "Mon", "Tue", "wed", "Thu", "Fri", "Sat"]
+      tuesday.textContent = weekDaysAre[oohDate]
+      //tue temp
+      console.log(data.list[1].main.temp)
+      const tempData = Math.round(data.list[1].main.temp - 273.15)
+      tuesdayHeading.textContent = tempData
 
 
-   //wed defined
-    console.log(data.list[9].dt_txt)
-   const wdateToday=new Date(data.list[9].dt_txt.split(" ")[0])
-      const woohDate=wdateToday.getDay();
-      wednesday.textContent=weekDaysAre[woohDate]
-   //wedtemp
-   console.log(data.list[9].main.temp)
-   const wtempData=Math.round(data.list[9].main.temp-273.15)
-  wednesdayHeading.textContent=wtempData
+      //wed defined
+      console.log(data.list[9].dt_txt)
+      const wdateToday = new Date(data.list[9].dt_txt.split(" ")[0])
+      const woohDate = wdateToday.getDay();
+      wednesday.textContent = weekDaysAre[woohDate]
+      //wedtemp
+      console.log(data.list[9].main.temp)
+      const wtempData = Math.round(data.list[9].main.temp - 273.15)
+      wednesdayHeading.textContent = wtempData
 
 
-//thu defined
-  console.log(data.list[17].dt_txt)
-   const thdateToday=new Date(data.list[17].dt_txt.split(" ")[0])
-      const thoohDate=thdateToday.getDay();
-     thursday.textContent=weekDaysAre[thoohDate]
-        //thutemp
-   console.log(data.list[17].main.temp)
-   const thtempData=Math.round(data.list[17].main.temp-273.15)
-  thursdayHeading.textContent=thtempData
+      //thu defined
+      console.log(data.list[17].dt_txt)
+      const thdateToday = new Date(data.list[17].dt_txt.split(" ")[0])
+      const thoohDate = thdateToday.getDay();
+      thursday.textContent = weekDaysAre[thoohDate]
+      //thutemp
+      console.log(data.list[17].main.temp)
+      const thtempData = Math.round(data.list[17].main.temp - 273.15)
+      thursdayHeading.textContent = thtempData
 
 
-  //fri defined
-  console.log(data.list[25].dt_txt)
-   const frdateToday=new Date(data.list[25].dt_txt.split(" ")[0])
-      const froohDate=frdateToday.getDay();
-    friday.textContent=weekDaysAre[froohDate]
-    //firTemp
+      //fri defined
+      console.log(data.list[25].dt_txt)
+      const frdateToday = new Date(data.list[25].dt_txt.split(" ")[0])
+      const froohDate = frdateToday.getDay();
+      friday.textContent = weekDaysAre[froohDate]
+      //firTemp
       console.log(data.list[25].main.temp)
-   const fridaytempData=Math.round(data.list[25].main.temp-273.15)
- fridayHeading.textContent=fridaytempData
+      const fridaytempData = Math.round(data.list[25].main.temp - 273.15)
+      fridayHeading.textContent = fridaytempData
 
 
 
-   }catch(error){
+   } catch (error) {
       console.log(error)
    }
 }
+
+
+//creating Map
+let map;
+let marker;
+
+function initMap(latitude, longitude) {
+   map = L.map('map').setView([latitude, longitude], 15);
+
+   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap'
+   }).addTo(map);
+
+   marker = L.marker([latitude, longitude]).addTo(map);
+}
+
+function mapLocation(latitude, longitude) {
+   map.setView([latitude, longitude], 15);
+   marker.setLatLng([latitude, longitude]);
+}
+//leaflet library use kro aur ek map object bnao and usse map id wli html mai render kro
+
+
+
+
+
+
+
+
+const dataBoxH1=document.querySelectorAll('.dBLeft h3')
