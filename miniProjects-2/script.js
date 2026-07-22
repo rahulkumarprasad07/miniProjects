@@ -48,7 +48,7 @@ searchCity.onkeydown = function (event) {
 
 
             mapLocation(latitude, longitude)
-            
+
 
 
 
@@ -189,13 +189,16 @@ tab.forEach((item, index) => {
 const bars = document.querySelectorAll('.actualBars')
 const timeTables = document.querySelectorAll('.time')
 async function rainGraph(latitude, longitude) {
+
    try {
-      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
+      const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=`)
+
       console.log(response)
       if (!response.ok) {
          console.log(response.status)
       }
       const data = await response.json();
+      console.log("here is temp")
       console.log(data)
       const weatherData = data.list.slice(0, 7);
       weatherData.forEach((item, index) => {
@@ -210,6 +213,36 @@ async function rainGraph(latitude, longitude) {
 
 
       });
+
+      const highTemps = [];
+      const lowTemps = [];
+
+      data.list.forEach((item) => {
+
+         if (item.dt_txt.includes("12:00:00")) {
+
+            highTemps.push(item.main.temp_max);
+            lowTemps.push(item.main.temp_min);
+
+         }
+
+      });
+
+      const highPoints = generatePoints(highTemps);
+
+      const highPath = generatePath(highPoints);
+
+      const fillPath = generateFillPath(highPoints);
+
+      document
+         .querySelector(".tempLine")
+         .setAttribute("d", highPath);
+
+      document
+         .querySelector(".tempFill")
+         .setAttribute("d", fillPath);
+
+      renderCircles(highPoints);
    } catch (error) {
       console.log(error)
    }
@@ -444,4 +477,95 @@ function mapLocation(latitude, longitude) {
 
 
 
-const dataBoxH1=document.querySelectorAll('.dBLeft h')
+function generatePoints(temps) {
+
+   const maxTemp = Math.max(...temps);
+   const minTemp = Math.min(...temps);
+
+   const svgWidth = 500;
+   const svgHeight = 200;
+
+   const leftPadding = 30;
+   const rightPadding = 30;
+   const topPadding = 20;
+   const bottomPadding = 20;
+
+   const graphHeight = svgHeight - topPadding - bottomPadding;
+   const usableWidth = svgWidth - leftPadding - rightPadding;
+   const spacing = usableWidth / (temps.length - 1);
+
+   const points = [];
+
+   for (let i = 0; i < temps.length; i++) {
+
+      const currentTemp = temps[i];
+
+      const x = leftPadding + (i * spacing);
+
+      const y = topPadding +
+         ((maxTemp - currentTemp) / (maxTemp - minTemp))
+         * graphHeight;
+
+      points.push({
+         x,
+         y
+      });
+
+   }
+
+   return points;
+}
+function generatePath(points) {
+
+   let path = "";
+
+   for (let i = 0; i < points.length; i++) {
+
+      if (i == 0) {
+         path += `M ${points[i].x} ${points[i].y}`;
+      }
+      else {
+         path += ` L ${points[i].x} ${points[i].y}`;
+      }
+
+   }
+
+   return path;
+}
+function generateFillPath(points) {
+
+   let fillPath = generatePath(points);
+
+   const lastPoint = points[points.length - 1];
+   const firstPoint = points[0];
+
+   fillPath += ` L ${lastPoint.x} 200`;
+   fillPath += ` L ${firstPoint.x} 200`;
+   fillPath += " Z";
+
+   return fillPath;
+}
+function renderCircles(points) {
+
+   const group = document.querySelector(".highPoints");
+
+   group.innerHTML = "";
+
+   points.forEach(point => {
+
+      const circle = document.createElementNS(
+         "http://www.w3.org/2000/svg",
+         "circle"
+      );
+
+      circle.setAttribute("cx", point.x);
+      circle.setAttribute("cy", point.y);
+      circle.setAttribute("r", 5);
+
+      circle.setAttribute("fill", "#8B5CF6");
+
+      group.appendChild(circle);
+
+   });
+
+}

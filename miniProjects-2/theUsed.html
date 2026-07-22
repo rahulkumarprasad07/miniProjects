@@ -332,38 +332,68 @@
                         </div>
                     </div>
                     <div class="itsTemp">
+
+                        <!-- SVG Canvas -->
                         <svg width="100%" height="200" viewBox="0 0 500 200">
+
+                            <!-- =========================
+             DEFINITIONS
+             Yaha gradients, filters etc.
+             define hote hain.
+        ========================== -->
                             <defs>
+
+                                <!-- Area Fill Gradient -->
                                 <linearGradient id="tempGradient" x1="0" y1="0" x2="0" y2="1">
 
-                                    <stop offset="0%" stop-color="#7C5CFC" stop-opacity="0.4" />
+                                    <!-- Top -->
+                                    <stop offset="0%" stop-color="#7C5CFC" stop-opacity="0.35" />
 
+                                    <!-- Bottom -->
                                     <stop offset="100%" stop-color="#7C5CFC" stop-opacity="0" />
 
                                 </linearGradient>
+
                             </defs>
-                            <path d="M 30 140
-               L 130 90
-               L 230 120
-               L 330 60
-               L 430 100" stroke="purple" stroke-width="4" fill="none" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <circle cx="30" cy="140" r="5" fill="#6C63FF" />
-                            <circle cx="130" cy="90" r="5" fill="#6C63FF" />
-                            <circle cx="230" cy="120" r="5" fill="#6C63FF" />
-                            <circle cx="330" cy="60" r="5" fill="#6C63FF" />
-                            <circle cx="430" cy="100" r="5" fill="#6C63FF" />
-                            <path d="M 30 140
-               L 130 90
-               L 230 120
-               L 330 60
-               L 430 100
-                   L 430 200
-                L30 200
-                Z" stroke="none" stroke-width="4" fill="url(#tempGradient)" stroke-linecap="round"
-                                stroke-linejoin="round" />
+
+                            <!-- =========================
+             AREA FILL
+             JS iska "d" attribute
+             dynamically change karega.
+        ========================== -->
+                            <path class="tempFill" d="" fill="url(#tempGradient)">
+                            </path>
+
+                            <!-- =========================
+             HIGH TEMPERATURE LINE
+             JS dynamically draw karega.
+        ========================== -->
+                            <path class="tempLine" d="" stroke="#8B5CF6" stroke-width="4" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                            </path>
+
+                            <!-- =========================
+             LOW TEMPERATURE LINE
+             (Future use)
+        ========================== -->
+                            <path class="lowTempLine" d="" stroke="#66D9FF" stroke-width="4" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                            </path>
+
+                            <!-- =========================
+             HIGH POINTS
+             Sare circles JS create karega.
+        ========================== -->
+                            <g class="highPoints"></g>
+
+                            <!-- =========================
+             LOW POINTS
+             Future use
+        ========================== -->
+                            <g class="lowPoints"></g>
 
                         </svg>
+
                     </div>
                     <div class="footer">
                         <p class="tempFooter">Mon</p>

@@ -858,11 +858,16 @@ display: flex;
    
 }
 .footer{
-    font-size: 15px;
+    display:flex;
+    justify-content:space-between;
+
+    padding-left:30px;
+    padding-right:30px;
+padding-inline:30px;
+
+    margin-top:-5px;
+    font-size:15px;
     color:var(--text-color);
-    display: flex;
-    justify-content: space-between;
-    
 }
 
 
