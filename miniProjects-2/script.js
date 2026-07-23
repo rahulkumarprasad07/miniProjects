@@ -331,7 +331,8 @@ const pressure = document.querySelectorAll('.valuesMonday')[1]
 const Humidity = document.querySelectorAll('.valuesMonday')[2]
 const sunrise = document.querySelectorAll('.mondaySunInfo span')[0]
 const sunset = document.querySelectorAll('.mondaySunInfo span')[1]
-
+const alert1=document.querySelector('.alert.t1 p')
+const alert2=document.querySelector('.alert.t2 p')
 async function mondayFeat(latitude, longitude) {
    try {
       const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
@@ -361,7 +362,20 @@ async function mondayFeat(latitude, longitude) {
       const sunSetData = Math.round(parseInt(sunSetContent)) * 1000;
       const sunEvening = new Date(sunSetData)
       sunset.textContent = sunEvening.getHours() + ":" + sunMorning.getMinutes();
+  //////yaha mai notificatin add kr rha hu
 
+const today = new Date().toISOString().split("T")[0];
+
+
+
+//   console.log("notification")
+//   console.log(data.list[6])
+
+//   if(rainProb*100>=80){
+//    alert1.textContent="It might Rain Today"
+//   }else if(tempProb-273>40){
+//    alert1.textContent="It might Hot day"
+//   }
 
    } catch (error) {
       console.log(error)
@@ -448,20 +462,41 @@ async function weekdaysEditing(latitude, longitude) {
    }
 }
 
+async function loadRainLayer() {
+   try {
+      const response = await fetch("https://api.rainviewer.com/public/weather-maps.json");
+      const data = await response.json();
 
+      const host = data.host;
+      //host is the server address
+      const path = data.radar.past[0].path;
+//path is the latest radar folder
+      const rainTileUrl = `${host}${path}/256/{z}/{x}/{y}/2/1_1.png`;
+//256 is tile size
+      L.tileLayer(rainTileUrl, {
+         attribution: "&copy; RainViewer"
+      }).addTo(map);
+
+   } catch (error) {
+      console.log(error);
+   }
+}
 //creating Map
 let map;
 let marker;
 
 function initMap(latitude, longitude) {
-   map = L.map('map').setView([latitude, longitude], 15);
+   map = L.map('map').setView([latitude, longitude], 4);
 
-   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
       maxZoom: 19,
       attribution: '&copy; OpenStreetMap'
    }).addTo(map);
+  
 
    marker = L.marker([latitude, longitude]).addTo(map);
+   console.log("tile working")
+   loadRainLayer();
 }
 
 function mapLocation(latitude, longitude) {
