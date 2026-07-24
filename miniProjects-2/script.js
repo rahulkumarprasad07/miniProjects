@@ -55,6 +55,9 @@ searchCity.onkeydown = function (event) {
             if (!response.ok) {
                console.log(response.status)
             }
+
+
+   
          }
          catch (error) {
             console.log(error)
@@ -214,6 +217,23 @@ async function rainGraph(latitude, longitude) {
 
       });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       const highTemps = [];
       const lowTemps = [];
 
@@ -324,15 +344,46 @@ async function forcastIcon(latitude, longitude) {
    currentTime();
    setInterval(currentTime, 6000)
 
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 const temperature = document.querySelector('.leftMonday h1')
 const wind = document.querySelectorAll('.valuesMonday')[0]
 const pressure = document.querySelectorAll('.valuesMonday')[1]
 const Humidity = document.querySelectorAll('.valuesMonday')[2]
 const sunrise = document.querySelectorAll('.mondaySunInfo span')[0]
 const sunset = document.querySelectorAll('.mondaySunInfo span')[1]
-const alert1=document.querySelector('.alert.t1 p')
-const alert2=document.querySelector('.alert.t2 p')
+
 async function mondayFeat(latitude, longitude) {
    try {
       const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
@@ -362,20 +413,19 @@ async function mondayFeat(latitude, longitude) {
       const sunSetData = Math.round(parseInt(sunSetContent)) * 1000;
       const sunEvening = new Date(sunSetData)
       sunset.textContent = sunEvening.getHours() + ":" + sunMorning.getMinutes();
-  //////yaha mai notificatin add kr rha hu
-
-const today = new Date().toISOString().split("T")[0];
+      //////yaha mai notificatin add kr rha hu
 
 
 
-//   console.log("notification")
-//   console.log(data.list[6])
 
-//   if(rainProb*100>=80){
-//    alert1.textContent="It might Rain Today"
-//   }else if(tempProb-273>40){
-//    alert1.textContent="It might Hot day"
-//   }
+      //   console.log("notification")
+      //   console.log(data.list[6])
+
+      //   if(rainProb*100>=80){
+      //    alert1.textContent="It might Rain Today"
+      //   }else if(tempProb-273>40){
+      //    alert1.textContent="It might Hot day"
+      //   }
 
    } catch (error) {
       console.log(error)
@@ -402,6 +452,9 @@ const friday = document.querySelectorAll('.weekDays p')[3]
 const fridayImg = document.querySelectorAll('.weekDays img')[3]
 const fridayHeading = document.querySelectorAll('.weekDays h2')[3]
 
+// heere is the notification target
+const alert1 = document.querySelector('.t1 p')
+const alert2 = document.querySelector('.t2 p')
 async function weekdaysEditing(latitude, longitude) {
    try {
       const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`)
@@ -454,9 +507,84 @@ async function weekdaysEditing(latitude, longitude) {
       console.log(data.list[25].main.temp)
       const fridaytempData = Math.round(data.list[25].main.temp - 273.15)
       fridayHeading.textContent = fridaytempData
+      //notificastion here
 
 
+      const todayDate = new Date().toISOString().split("T")[0];
 
+   alert1.textContent=""
+         alert2.textContent=""
+
+      data.list.forEach((item) => {
+      
+         const probRain = item.pop
+         const probTemp = item.main.temp
+         const probHumid = item.main.humidity
+         const probWind = item.wind.speed
+       
+         if (item.dt_txt.includes(todayDate) && item.dt_txt.includes("12:00:00")) {
+
+            if (probRain * 100 > 80) {
+               if (alert1.textContent.trim() === "") {
+                  alert1.textContent = "🌧️ Wet roads ahead—travel carefully";
+               } else if (alert2.textContent.trim() === "") {
+                  alert2.textContent = "🌧️ Wet roads ahead—travel carefully";
+               }
+            }
+
+            if (probTemp - 273 > 38) {
+               if (alert1.textContent.trim() === "") {
+                  alert1.textContent = "🔥 It's going to be a hot day. Stay hydrated.";
+               } else if (alert2.textContent.trim() === "") {
+                  alert2.textContent = "🔥 It's going to be a hot day. Stay hydrated.";
+               }
+            }
+
+            if (probTemp - 273 < 10) {
+               if (alert1.textContent.trim() === "") {
+                  alert1.textContent = "🧥 It's going to be a chilly day. Dress warmly.";
+               } else if (alert2.textContent.trim() === "") {
+                  alert2.textContent = "🧥 It's going to be a chilly day. Dress warmly.";
+               }
+            }
+
+            if (probHumid > 70) {
+               if (alert1.textContent.trim() === "") {
+                  alert1.textContent = "💧 High humidity may make it feel warmer.";
+               } else if (alert2.textContent.trim() === "") {
+                  alert2.textContent = "💧 High humidity may make it feel warmer.";
+               }
+            }
+
+            if (probWind > 5 && probWind < 10) {
+               if (alert1.textContent.trim() === "") {
+                  alert1.textContent = "💨 Breezy winds expected today.";
+               } else if (alert2.textContent.trim() === "") {
+                  alert2.textContent = "💨 Breezy winds expected today.";
+               }
+            }
+
+            if (probWind >= 10) {
+               if (alert1.textContent.trim() === "") {
+                  alert1.textContent = `💨 Strong winds expected today (${probWind} m/s).`;
+               } else if (alert2.textContent.trim() === "") {
+                  alert2.textContent = `💨 Strong winds expected today (${probWind} m/s).`;
+               }
+            }
+         }
+      });
+
+    if (
+   alert1.textContent.trim() === "" &&
+   alert2.textContent.trim() === ""
+) {
+   alert1.textContent = "😎 Everything looks great outside. Have fun";
+   alert2.textContent = "☀️ Clear skies ahead. Have a wonderful day!";
+} else if (alert1.textContent.trim() === "") {
+   alert1.textContent = "😎 Everything looks great outside. Have fun";
+} else if (alert2.textContent.trim() === "") {
+   alert2.textContent = "☀️ Clear skies ahead. Have a wonderful day!";
+}
    } catch (error) {
       console.log(error)
    }
@@ -470,9 +598,9 @@ async function loadRainLayer() {
       const host = data.host;
       //host is the server address
       const path = data.radar.past[0].path;
-//path is the latest radar folder
+      //path is the latest radar folder
       const rainTileUrl = `${host}${path}/256/{z}/{x}/{y}/2/1_1.png`;
-//256 is tile size
+      //256 is tile size
       L.tileLayer(rainTileUrl, {
          attribution: "&copy; RainViewer"
       }).addTo(map);
@@ -492,7 +620,7 @@ function initMap(latitude, longitude) {
       maxZoom: 19,
       attribution: '&copy; OpenStreetMap'
    }).addTo(map);
-  
+
 
    marker = L.marker([latitude, longitude]).addTo(map);
    console.log("tile working")
@@ -511,6 +639,11 @@ function mapLocation(latitude, longitude) {
 
 
 
+
+
+
+
+// temp code hai dkehna h mujhe abhi baaaki hai ye
 
 function generatePoints(temps) {
 
@@ -604,3 +737,14 @@ function renderCircles(points) {
    });
 
 }
+
+
+
+
+
+const favourite= document.querySelectorAll('.dataBoxes')
+favourite.forEach((item)=>
+item.addEventListener("click",(event)=>{
+   console.log(event.currentTarget)
+})
+)
